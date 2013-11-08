@@ -1,0 +1,1 @@
+Job Shop scheduling optimization by Genetic Algorithms accerelated by CUDA
