@@ -1,5 +1,11 @@
-#Script to generate test cases randomly
-
+# Name:		TestGen.py
+# Author:		ChinniKrishna Kothapalli
+# Email:		kothapal@pdx.edu
+# Date:		11/09/13
+# Version:	v0.1
+# Description:Python script to automatically generate test cases as follows 
+# a)Test Case Number b)Machine Sequence c)Time for each machine
+# ToDo:		Add support for a)Dependent process b)Machine Failures 
 #Imports
 from random import randrange;
 from random import sample;
