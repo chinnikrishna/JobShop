@@ -15,6 +15,10 @@ for NC in range(1,int(NoCases)+1):
 	Pop=range(1,int(NumMac)+1);
 	Seq=sample(Pop,K);
 	File.write(str(Seq));
+	File.write("\t[");
+	for Time in range (1,K+1):
+		File.write(str(randrange(1,int(MaxTime)+1))+",");
+	File.write("]");
 File.close();
     
 
