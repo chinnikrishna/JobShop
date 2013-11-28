@@ -5,7 +5,7 @@
 # Version:	v0.1
 # Description:Python script to automatically generate test cases as follows 
 # a)Test Case Number b)Machine Sequence c)Time for each machine
-# ToDo:		Add support for a)Dependent process b)Machine Failures 
+# ToDo:		Add support for a)Dependent process b)Machine Failures c)Scenario with multiple machines for same operation
 #Imports
 from random import randrange;
 from random import sample;
@@ -17,7 +17,7 @@ MaxTime=input("Enter the max time each job can take:");
 File=open("Test.txt","w");
 for NC in range(1,int(NoCases)+1):
 	File.write("\n"+str(NC)+",\t");
-	K=randrange(2,int(NumMac)+1);
+	K=randrange(1,int(NumMac)+1);
 	Pop=range(1,int(NumMac)+1);
 	Seq=sample(Pop,K);
 	File.write(str(Seq));

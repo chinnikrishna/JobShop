@@ -1,0 +1,10 @@
+# depslib dependency file v1.0
+1385326591 source:c:\users\chinnikrishna\documents\github\jobshop\code\serial\jobshop\main.cpp
+	<iostream>
+	<string>
+	<vector>
+	<algorithm>
+	<cstdlib>
+	<sstream>
+	<cstring>
+
