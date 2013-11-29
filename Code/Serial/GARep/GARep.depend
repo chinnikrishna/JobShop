@@ -1,0 +1,10 @@
+# depslib dependency file v1.0
+1385707135 source:c:\users\chinnikrishna\documents\github\jobshop\code\serial\garep\main.cpp
+	<iostream>
+	<vector>
+	<fstream>
+	<ctime>
+	<cstdlib>
+	<string>
+	<algorithm>
+

@@ -1,0 +1,23 @@
+# depslib dependency file v1.0
+1385706698 source:c:\users\chinnikrishna\documents\github\jobshop\code\jssrep\rep\fileops.cpp
+	"Operations.h"
+
+1385702745 c:\users\chinnikrishna\documents\github\jobshop\code\jssrep\rep\fileops.h
+	<string>
+	<fstream>
+	<iostream>
+	<cstdlib>
+
+1385715925 source:c:\users\chinnikrishna\documents\github\jobshop\code\jssrep\rep\main.cpp
+	"Operations.h"
+
+1385715985 c:\users\chinnikrishna\documents\github\jobshop\code\jssrep\rep\operations.h
+	<string>
+	<fstream>
+	<iostream>
+	<cstdlib>
+	<ctime>
+
+1385715907 source:c:\users\chinnikrishna\documents\github\jobshop\code\jssrep\rep\individualgenerator.cpp
+	"Operations.h"
+
