@@ -17,11 +17,18 @@ using namespace std;
 #ifndef FILEOPS_H_INCLUDED
 #define FILEOPS_H_INCLUDED
 //#define DEBUG 1
+
+
+//Data Structure for Individual
+struct Individual
+{
+    string Chromosome;
+    float Fitness;
+};
 //Prototypes
 int ReadBenchMark(string FileName,int *Machines,int *Jobs); //Defined in FileOps.cpp
 string GenerateChromosome(int Jobs,int Machines);              //Defined in IndividualGenerator.cpp
-int CreateUniverse(int Population);
-
-
+Individual CreateUniverse(int Population);
+int PrintIndividual(Individual Ind[],int Population);
 
 #endif // FILEOPS_H_INCLUDED

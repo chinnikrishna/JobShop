@@ -13,12 +13,7 @@
 //Gene Codebase
 static const char alphanum[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
-//Data Structure for Individual
-struct Individual
-{
-    string Chromosome;
-    float Fitness;
-};
+
 
 //Function to Generate Random Character
 char GetRandomChar(int Position)
@@ -36,14 +31,14 @@ int PrintIndividual(Individual Ind[],int Population)
     return 0;
 }
 //Creates Universe with population as parameter
-int CreateUniverse(int Population)
+Individual CreateUniverse(int Population,Invidiual *Universe)
 {
     int NumMachines;
     int NumJobs;
     //Seeding the Random number generator
     srand(time(0));
     //Generate a universe of population
-    Individual Universe[Population];
+    //Individual Universe[Population];
     //Read the BenchMark file
     ReadBenchMark("C:\\F5.txt",&NumMachines,&NumJobs);
     for(int i=0;i<Population;i++)
@@ -53,9 +48,6 @@ int CreateUniverse(int Population)
 
     }
     PrintIndividual(Universe,Population);
-
-    return 0;
-
 }
 
 //Generates a random individual by permutations with repetations
