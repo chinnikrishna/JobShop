@@ -31,16 +31,16 @@ int PrintIndividual(Individual Ind[],int Population)
     return 0;
 }
 //Creates Universe with population as parameter
-Individual CreateUniverse(int Population,Invidiual *Universe)
+Individual CreateUniverse(int Population)
 {
     int NumMachines;
     int NumJobs;
     //Seeding the Random number generator
     srand(time(0));
     //Generate a universe of population
-    //Individual Universe[Population];
+    Individual Universe[Population];
     //Read the BenchMark file
-    ReadBenchMark("C:\\F5.txt",&NumMachines,&NumJobs);
+    ReadBenchMark("C:\\sample.txt",&NumMachines,&NumJobs);
     for(int i=0;i<Population;i++)
     {
         Universe[i].Chromosome=GenerateChromosome(NumJobs,NumMachines);
