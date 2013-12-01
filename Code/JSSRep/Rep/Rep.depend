@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1385706698 source:c:\users\chinnikrishna\documents\github\jobshop\code\jssrep\rep\fileops.cpp
+1385868319 source:c:\users\chinnikrishna\documents\github\jobshop\code\jssrep\rep\fileops.cpp
 	"Operations.h"
 
 1385702745 c:\users\chinnikrishna\documents\github\jobshop\code\jssrep\rep\fileops.h
@@ -8,22 +8,25 @@
 	<iostream>
 	<cstdlib>
 
-1385857670 source:c:\users\chinnikrishna\documents\github\jobshop\code\jssrep\rep\main.cpp
+1385868561 source:c:\users\chinnikrishna\documents\github\jobshop\code\jssrep\rep\main.cpp
 	"Operations.h"
 
-1385857675 c:\users\chinnikrishna\documents\github\jobshop\code\jssrep\rep\operations.h
+1385871738 c:\users\chinnikrishna\documents\github\jobshop\code\jssrep\rep\operations.h
+	<cstring>
 	<string>
 	<fstream>
 	<iostream>
 	<cstdlib>
 	<ctime>
 	<vector>
+	<algorithm>
 
 1385762824 source:c:\users\chinnikrishna\documents\github\jobshop\code\jssrep\rep\individualgenerator.cpp
 	"Operations.h"
 
-1385860628 source:c:\users\chinnikrishna\documents\github\jobshop\code\jssrep\rep\universegenerator.cpp
+1385868276 source:c:\users\chinnikrishna\documents\github\jobshop\code\jssrep\rep\universegenerator.cpp
 	"Operations.h"
 
-1385857109 source:c:\users\chinnikrishna\documents\github\jobshop\code\jssrep\rep\evaluateindividual.cpp
+1385873696 source:c:\users\chinnikrishna\documents\github\jobshop\code\jssrep\rep\evaluateindividual.cpp
+	"operations.h"
 

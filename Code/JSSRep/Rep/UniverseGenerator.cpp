@@ -20,45 +20,43 @@ char GetRandomChar(int Position)
 {
     return alphanum[rand() % Position];
 }
+
 //Print Individual
-int PrintIndividual(Individual Ind[],int Population)
+int PrintIndividual(Individual Ind)
 {
-    for(int i=0;i<Population;i++)
-    {
-        cout<<"Chromosome "<<i<<":"<<Ind[i].Chromosome;
-        cout<<"\tFitness "<<i<<":"<<Ind[i].Fitness<<endl;
-    }
+        cout<<"Chromosome "<<Ind.Chromosome;
+        cout<<"\tFitness "<<Ind.Fitness<<endl;
     return 0;
 }
 //Creates Universe with population as parameter
-Individual CreateUniverse(int Population)
+int CreateUniverse(int Population, Individual* Universe, unsigned int NumJobs, unsigned int NumMachines)
 {
-    int NumMachines;
-    int NumJobs;
+    if(!Universe)
+        return 0;
     //Seeding the Random number generator
     srand(time(0));
-    //Generate a universe of population
-    Individual Universe[Population];
-    //Read the BenchMark file
-    ReadBenchMark("C:\\sample.txt",&NumMachines,&NumJobs);
-    for(int i=0;i<Population;i++)
-    {
-        Universe[i].Chromosome=GenerateChromosome(NumJobs,NumMachines);
-        Universe[i].Fitness=0.0;
 
+    //Read the BenchMark file
+
+    for(int i = 0; i < Population; i++)
+    {
+        Universe[i].Chromosome = GenerateChromosome(NumJobs,NumMachines);
+        Universe[i].Fitness = 0.0;
+        PrintIndividual(Universe[i]);
     }
-    PrintIndividual(Universe,Population);
+
+    return 1;
 }
 
 //Generates a random individual by permutations with repetations
 string GenerateChromosome(int Jobs,int Machines)
 {
     //Variables
-    int ChromosomeLength=Jobs*Machines;         //Length of Chromosome
-    int Position=Jobs;                          //Position for alphanum
+    int ChromosomeLength = Jobs * Machines;         //Length of Chromosome
+    int Position = Jobs;                          //Position for alphanum
     int Counter[Jobs];                          //Counter to enforce numbering
     char Test;                                  //Storage for the char returned by GetRandomChar
-    string Chromosome;        //Actual Chromosome generated
+    string Chromosome;                          //Actual Chromosome generated
     int i;                                      //General purpose counter
 
 

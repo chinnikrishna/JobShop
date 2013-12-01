@@ -29,6 +29,7 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="EvaluateIndividual.cpp" />
 		<Unit filename="FileOps.cpp" />
 		<Unit filename="Operations.h" />
 		<Unit filename="UniverseGenerator.cpp" />

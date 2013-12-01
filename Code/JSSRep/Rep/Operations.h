@@ -6,12 +6,14 @@
  Version:       0.1
  Description:   Header file which has all the prototypes of the fucntions
  ToDo:*/
+ #include <cstring>
 #include <string>
 #include <fstream>
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
 #include <vector>
+#include <algorithm>
 using namespace std;
 
 #ifndef FILEOPS_H_INCLUDED
@@ -26,9 +28,9 @@ struct Individual
     float Fitness;
 };
 //Prototypes
-int ReadBenchMark(string FileName,int *Machines,int *Jobs); //Defined in FileOps.cpp
+int ReadBenchMark(string Filename,unsigned int *Jobs,unsigned int *Machines); //Defined in FileOps.cpp
 string GenerateChromosome(int Jobs,int Machines);              //Defined in IndividualGenerator.cpp
-Individual CreateUniverse(int Population);
-int PrintIndividual(Individual Ind[],int Population);
-
+int CreateUniverse(int Population, Individual* Universe, unsigned int Jobs, unsigned int Machines);
+int PrintIndividual(Individual Ind);
+int EvaluateChromosome(unsigned int Jobs, unsigned int Machines);
 #endif // FILEOPS_H_INCLUDED

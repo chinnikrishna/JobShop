@@ -1,5 +1,5 @@
 #include "Operations.h"
-int ReadBenchMark(string Filename,int *Machines,int *Jobs)
+int ReadBenchMark(string Filename,unsigned int *Jobs,unsigned int *Machines)
 {
     char M[50];
     char J[50];
@@ -11,7 +11,7 @@ int ReadBenchMark(string Filename,int *Machines,int *Jobs)
     //Error Handler
     if(!inFile)
     {
-        cout<<"Can't find the benchmark file named "<<Filename<<endl;
+        cout << "Can't find the benchmark file named "<<Filename<<endl;
         exit(1);
     }
     //Getting number of machines and jobs

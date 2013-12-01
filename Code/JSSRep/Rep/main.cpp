@@ -10,6 +10,19 @@
 int main()
 {
     //Create Universe
-    int pop=100;
-    CreateUniverse(pop);
+    unsigned int population = 10;
+    unsigned int NumMachines;
+    unsigned int NumJobs;
+
+    // Create the universe
+    Individual* universe = new Individual[population];
+
+    ReadBenchMark("C:\\sample.txt",&NumMachines,&NumJobs);
+    CreateUniverse(population, universe,NumJobs,NumMachines);
+    EvaluateChromosome(NumJobs, NumMachines);
+
+
+    if(universe)
+        delete[] universe;
+
 }
