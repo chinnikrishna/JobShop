@@ -1,25 +1,83 @@
 #include "Operations.h"
-int ReadBenchMark(string Filename,unsigned int *Jobs,unsigned int *Machines)
+
+// Technology matrix
+extern unsigned int **T;
+
+// Processing times matrix
+extern unsigned int **P;
+
+int ReadBenchMark(FILE* fp, unsigned int* jobs, unsigned int* machines)
 {
-    char M[50];
-    char J[50];
-    int i;
-    //Input stream for the file
-    ifstream inFile;
-    //Opening the file
-    inFile.open(Filename.c_str());
-    //Error Handler
-    if(!inFile)
+
+    // Loop counters
+    unsigned int i = 0;
+
+    // Number of Jobs
+    unsigned int numJobs;
+
+    // Number of Machines
+    unsigned int numMachines;
+
+    // Line buffer for per line file read
+    char line[1024];
+
+    // Pointer to characters inside the line
+    char * pline = &line[0];
+
+    // Job count AKA line counter
+    unsigned int jobCount = 0;
+
+    // Number of characters read by sscanf
+    unsigned int ch;
+
+    // Argument checks
+    if(!fp || !jobs || !machines)
     {
-        cout << "Can't find the benchmark file named "<<Filename<<endl;
-        exit(1);
+        cout<<"FILE NOT FOUND"<<endl;
+        return 0;
     }
-    //Getting number of machines and jobs
-    for(i=0;i<1;i++){
-        inFile>> J >> M;
+
+    // Read the number of machines and number of jobs
+    fscanf(fp,"%d %d",&numJobs,&numMachines);
+    *jobs = numJobs;
+    *machines = numMachines;
+
+    // Allocate memory for Technology Order matrix
+    T = new unsigned int* [numJobs];
+    for(i = 0; i < numJobs; i++)
+    {
+        T[i] = new unsigned int[numMachines];
     }
-    *Machines=atoi(M);
-    *Jobs=atoi(J);
-    inFile.close();
-    return 0;
+
+    // Allocate memory for Processing Time matrix
+    P = new unsigned int* [numJobs];
+    for(i = 0; i < numJobs; i++)
+    {
+        P[i] = new unsigned int[numMachines];
+    }
+
+    // Read the file linewise
+    while(fgets(line,sizeof(line),fp))
+    {
+       pline = &line[0];
+
+       // Skip line endings
+       if(line[0] == '\n')
+            continue;
+
+       // Parse the line into format {Machine Name, Task Time}
+       // Remember: Number of tasks = number of machines!
+       for(i = 0; i < numMachines; i++)
+       {
+           sscanf(pline,"%d %d%n",&T[jobCount][i], &P[jobCount][i], &ch);
+           pline += ch;
+       }
+
+       // Increment Line count AKA job count
+       jobCount++;
+    }
+
+    return 1;
+
 }
+

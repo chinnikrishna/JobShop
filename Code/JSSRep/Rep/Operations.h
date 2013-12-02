@@ -14,6 +14,8 @@
 #include <ctime>
 #include <vector>
 #include <algorithm>
+#include <cmath>
+#include <iomanip>
 using namespace std;
 
 #ifndef FILEOPS_H_INCLUDED
@@ -28,9 +30,10 @@ struct Individual
     float Fitness;
 };
 //Prototypes
-int ReadBenchMark(string Filename,unsigned int *Jobs,unsigned int *Machines); //Defined in FileOps.cpp
 string GenerateChromosome(int Jobs,int Machines);              //Defined in IndividualGenerator.cpp
 int CreateUniverse(int Population, Individual* Universe, unsigned int Jobs, unsigned int Machines);
 int PrintIndividual(Individual Ind);
-int EvaluateChromosome(unsigned int Jobs, unsigned int Machines);
+int EvaluateChromosome(unsigned int Jobs, unsigned int Machines,unsigned int ***T,unsigned int ***P1);
+int ReadBenchMark(FILE* fp, unsigned int* jobs, unsigned int* machines);
+
 #endif // FILEOPS_H_INCLUDED

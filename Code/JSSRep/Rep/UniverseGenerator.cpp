@@ -35,16 +35,11 @@ int CreateUniverse(int Population, Individual* Universe, unsigned int NumJobs, u
         return 0;
     //Seeding the Random number generator
     srand(time(0));
-
-    //Read the BenchMark file
-
     for(int i = 0; i < Population; i++)
     {
         Universe[i].Chromosome = GenerateChromosome(NumJobs,NumMachines);
         Universe[i].Fitness = 0.0;
-        PrintIndividual(Universe[i]);
     }
-
     return 1;
 }
 
@@ -58,9 +53,6 @@ string GenerateChromosome(int Jobs,int Machines)
     char Test;                                  //Storage for the char returned by GetRandomChar
     string Chromosome;                          //Actual Chromosome generated
     int i;                                      //General purpose counter
-
-
-
     //Initialize the Counter Array
     for(int Cnt=0;Cnt<Jobs;Cnt++)
         Counter[Cnt]=0;
@@ -91,17 +83,10 @@ string GenerateChromosome(int Jobs,int Machines)
     //Null terminate the string
     Chromosome[ChromosomeLength]='\0';
 
-    #ifdef DEBUG
+    #if 0
     cout<<Chromosome<<endl;
     for(int i=0;i<Jobs;i++)
         cout<<Counter[i];
     #endif
     return Chromosome;
 }
-/*//Validates if the randomly generated individual follows the technological process
-int ScheduleDecoder(string Chromosome)
-{
-    int T1[3][4]={{1,3,2,4},{1,4,2,3},{3,2,4,1}};
-
-    return 0;
-}*/
