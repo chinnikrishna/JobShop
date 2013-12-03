@@ -6,12 +6,17 @@
  Version:       0.1
  Description:   Evaluate Individuals by reporting their fitness
  ToDo:*/
-#include "operations.h"
+//#include "operations.h"
 
+#include <cstring>
+#include <iostream>
+#include "types.h"
+#include "EvaluateIndividual.h"
 
-int EvaluateChromosome(unsigned int Jobs, unsigned int Machines, unsigned int ***T1,unsigned int ***P1)
+int EvaluateIndividual(Individual& indv, unsigned int Jobs, unsigned int Machines, unsigned int ***T1,unsigned int ***P1)
 {
-    char ind[] = "AACBBABCBACC";
+    //char ind[] = "AACBBABCBACC";
+    string ind = indv.Chromosome;
     unsigned int i=0;
     unsigned int j=0;
     unsigned int k=0;
@@ -64,7 +69,7 @@ int EvaluateChromosome(unsigned int Jobs, unsigned int Machines, unsigned int **
     }
 
 
-    for (k = 0; k < strlen(ind); k++)
+    for (k = 0; k < ind.length(); k++)
     {
         /*operation sequencing*/
         i = ind[k] - 'A';         // Current Job
@@ -86,7 +91,7 @@ int EvaluateChromosome(unsigned int Jobs, unsigned int Machines, unsigned int **
     #if 1
     cout << endl;
     cout << "Solution Matrix"<<endl;
-    for (int i = 0; i < Machines; i++)
+    for (unsigned int i = 0; i < Machines; i++)
     {
         cout << "M" << i + 1 << "\t";
         for(unsigned int j = 0; j < Jobs; j++)
@@ -146,5 +151,5 @@ int EvaluateChromosome(unsigned int Jobs, unsigned int Machines, unsigned int **
 }*/
 int PrintSolution()
 {
-
+    return 0;
 }

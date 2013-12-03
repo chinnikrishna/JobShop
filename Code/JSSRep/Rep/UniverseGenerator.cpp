@@ -7,13 +7,17 @@
  Description:   Generates universe with required number of individuals. Required number of individuals are mentioned with population parameter
  ToDo:*/
 
-#include "Operations.h"
+#include <iostream>
+#include <ctime>
+#include <cstdlib>
 
+//#include "Operations.h"
+#include "types.h"
+#include "UniverseGenerator.h"
+#include "EvaluateIndividual.h"
 
 //Gene Codebase
 static const char alphanum[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-
-
 
 //Function to Generate Random Character
 char GetRandomChar(int Position)

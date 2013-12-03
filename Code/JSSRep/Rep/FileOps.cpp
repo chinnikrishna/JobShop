@@ -1,4 +1,7 @@
-#include "Operations.h"
+//#include "Operations.h"
+#include <iostream>
+#include "types.h"
+#include "FileOps.h"
 
 // Technology matrix
 extern unsigned int **T;

@@ -6,7 +6,15 @@
  Version:       0.1
  Description:   Genetic Algorithm to solve Job Shop Scheduling
  ToDo:*/
-#include "Operations.h"
+
+#include <cstdio>
+
+#include "types.h"
+//#include "Operations.h"
+#include "crossover.h"
+#include "FileOps.h"
+#include "EvaluateIndividual.h"
+#include "UniverseGenerator.h"
 
 // Technology matrix
 unsigned int **T;
@@ -20,20 +28,49 @@ unsigned int NumJobs;
 // Number of Machines
 unsigned int NumMachines;
 
+#define CROSSOVER_PART	(0.4)
+#define __debug__
 
+#define CROSSOVER_PERC  (0.4)
+#define NUM_GENERATIONS (300)
 int main()
 {
     //Create Universe
     unsigned int population = 10;
+    unsigned int len_crossover;
+
     //Reading Benchmarks
     FILE* fp = fopen("C:\\Benchmark\\sample.txt","r+");
     ReadBenchMark(fp, &NumJobs, &NumMachines);
+
     // Create the universe
     Individual* universe = new Individual[population];
+
     //Fill the universe with individuals
     CreateUniverse(population, universe,NumJobs,NumMachines);
-    //EvaluatePopulation
-    EvaluateChromosome(NumJobs, NumMachines,&T,&P);
+
+    for(unsigned int j = 0; j < NUM_GENERATIONS; j++)
+    {
+
+        for(unsigned int i = 0; i < population; i++)
+        {
+            //EvaluatePopulation
+            EvaluateIndividual(universe[i],NumJobs, NumMachines,&T,&P);
+        }
+
+        // Sort the evaluated population. Do something
+
+        // Generate Offsprings
+        string parent = GenerateChromosome(NumJobs,NumMachines);
+        string donor = GenerateChromosome(NumJobs,NumMachines);
+        len_crossover = NumJobs * NumMachines * CROSSOVER_PART;
+
+        for(i = 0; i < population; i++)
+        {
+            string offspring = CrossOver(parent,donor,len_crossover,NumJobs,NumMachines);
+        }
+    }
+
 
     //Cleanup
     unsigned int i;
