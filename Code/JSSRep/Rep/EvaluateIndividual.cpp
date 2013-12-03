@@ -10,22 +10,22 @@
 
 #include <cstring>
 #include <iostream>
+#include <algorithm>
 #include "types.h"
 #include "EvaluateIndividual.h"
 
 int EvaluateIndividual(Individual& indv, unsigned int Jobs, unsigned int Machines, unsigned int ***T1,unsigned int ***P1)
 {
-    //char ind[] = "AACBBABCBACC";
     string ind = indv.Chromosome;
     unsigned int i=0;
     unsigned int j=0;
     unsigned int k=0;
     unsigned int start=0;
     //Array to keep track of task
-    unsigned int Tnext[Machines];
-    unsigned int Snext[Machines];
-    unsigned int Jstart[Machines];
-    unsigned int Mstart[Machines];
+    unsigned int Tnext[Jobs];
+    unsigned int Snext[Jobs];
+    unsigned int Jstart[Jobs];
+    unsigned int Mstart[Jobs];
     //Copying Technology and Processing time matrix
     unsigned int **T2 = (*T1);
     unsigned int **P2 = (*P1);
@@ -39,10 +39,12 @@ int EvaluateIndividual(Individual& indv, unsigned int Jobs, unsigned int Machine
     }
     for(unsigned int a=0;a<Jobs;a++)
     {
+        //cout<<endl;
         for(unsigned int b=0;b<Machines;b++)
         {
             T[a][b] = T2[a][b];
             P[a][b] = P2[a][b];
+            //cout<<" "<<T[a][b];
         }
     }
 
@@ -51,7 +53,7 @@ int EvaluateIndividual(Individual& indv, unsigned int Jobs, unsigned int Machine
     //Time Matrix
     unsigned int Jstartind[Jobs][Machines];
     //Setting to zero
-    for(unsigned int a=0;a<Machines;a++)
+    for(unsigned int a=0;a<Jobs;a++)
     {
         Tnext[a]=0;
         Snext[a]=0;
@@ -67,15 +69,14 @@ int EvaluateIndividual(Individual& indv, unsigned int Jobs, unsigned int Machine
             Jstartind[a][b]=0;
         }
     }
-
-
+    //Chromosome Evaluation
     for (k = 0; k < ind.length(); k++)
     {
         /*operation sequencing*/
         i = ind[k] - 'A';         // Current Job
         j = T[i][Tnext[i]];       // Machine Name
+        //cout<<" I:"<<i<<" J:"<<j<<" P:"<<P[i][j]<<endl;
         S[j][Snext[j]] = i + 'A'; // Current Job on this Machine
-        cout<<" I:"<<i<<" J:"<<j<<" P:"<<P[i][j]<<endl;
         ++Tnext[i];               // Sub task in current job
         ++Snext[j];               // Next job on this machine
 
@@ -87,8 +88,10 @@ int EvaluateIndividual(Individual& indv, unsigned int Jobs, unsigned int Machine
         //Filling the time matrices
         Jstartind[i][j] = Jstart[i];
     }
+    //Assigning fitness
+    indv.Fitness=Jstart[0];
     //Printing Solution and Time
-    #if 1
+    #if 0
     cout << endl;
     cout << "Solution Matrix"<<endl;
     for (unsigned int i = 0; i < Machines; i++)
@@ -113,6 +116,20 @@ int EvaluateIndividual(Individual& indv, unsigned int Jobs, unsigned int Machine
     }
     #endif
     return 0;
+}
+int SortPopulation(Individual Popu[],int population,Individual *temp)
+{
+    cout<<"Init"<<endl;
+    #if 0
+    for(int i=0;i<population;i++)
+    {
+        temp[i]=Popu[i].Fitness;
+        cout<<temp[i]<<endl;
+    }
+    #endif
+    sort(temp,temp+population);
+    cout<<"Sorted"<<endl;
+
 }
 
 /*int PrintGnattChart()
@@ -149,7 +166,4 @@ int EvaluateIndividual(Individual& indv, unsigned int Jobs, unsigned int Machine
         cout<<endl;
     }
 }*/
-int PrintSolution()
-{
-    return 0;
-}
+

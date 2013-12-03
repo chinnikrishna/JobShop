@@ -43,6 +43,7 @@ int CreateUniverse(int Population, Individual* Universe, unsigned int NumJobs, u
     {
         Universe[i].Chromosome = GenerateChromosome(NumJobs,NumMachines);
         Universe[i].Fitness = 0.0;
+        //PrintIndividual(Universe[i]);
     }
     return 1;
 }

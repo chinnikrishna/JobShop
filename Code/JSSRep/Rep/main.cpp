@@ -8,7 +8,7 @@
  ToDo:*/
 
 #include <cstdio>
-
+#include <iostream>
 #include "types.h"
 //#include "Operations.h"
 #include "crossover.h"
@@ -32,23 +32,44 @@ unsigned int NumMachines;
 #define __debug__
 
 #define CROSSOVER_PERC  (0.4)
-#define NUM_GENERATIONS (300)
+#define NUM_GENERATIONS (3)
 int main()
 {
     //Create Universe
     unsigned int population = 10;
     unsigned int len_crossover;
 
+    //Sorted Array
+    //float SortedFitness[population];
+
     //Reading Benchmarks
-    FILE* fp = fopen("C:\\Benchmark\\sample.txt","r+");
+    FILE* fp = fopen("C:\\Benchmark\\LA40.txt","r+");
     ReadBenchMark(fp, &NumJobs, &NumMachines);
 
     // Create the universe
     Individual* universe = new Individual[population];
-
+    Individual* SortedFitness = new Individual[population];
     //Fill the universe with individuals
     CreateUniverse(population, universe,NumJobs,NumMachines);
 
+    //Evaluate the fitness of each individual
+    for(unsigned int i = 0; i < population; i++)
+    {
+        EvaluateIndividual(universe[i],NumJobs, NumMachines,&T,&P);
+        //cout<<"Fitness:"<<universe[i].Fitness<<endl;
+    }
+    //Sort the population according to their fitness and fill it in Sorted
+    SortPopulation(universe,population,SortedFitness);
+    for (int i = 0; i<population;i++)
+        cout << SortedFitness[i] << " ";
+    //Crossover
+    string parent =
+    string donor = GenerateChromosome(NumJobs,NumMachines);
+    len_crossover = NumJobs * NumMachines * CROSSOVER_PART;
+
+
+
+    #if 0
     for(unsigned int j = 0; j < NUM_GENERATIONS; j++)
     {
 
@@ -65,11 +86,12 @@ int main()
         string donor = GenerateChromosome(NumJobs,NumMachines);
         len_crossover = NumJobs * NumMachines * CROSSOVER_PART;
 
-        for(i = 0; i < population; i++)
+        for(int i = 0; i < population; i++)
         {
             string offspring = CrossOver(parent,donor,len_crossover,NumJobs,NumMachines);
         }
     }
+    #endif
 
 
     //Cleanup

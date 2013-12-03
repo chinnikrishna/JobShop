@@ -30,10 +30,15 @@
 			<Add option="-fexceptions" />
 		</Compiler>
 		<Unit filename="EvaluateIndividual.cpp" />
+		<Unit filename="EvaluateIndividual.h" />
 		<Unit filename="FileOps.cpp" />
-		<Unit filename="Operations.h" />
+		<Unit filename="FileOps.h" />
 		<Unit filename="UniverseGenerator.cpp" />
+		<Unit filename="UniverseGenerator.h" />
+		<Unit filename="crossover.cpp" />
+		<Unit filename="crossover.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="types.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />

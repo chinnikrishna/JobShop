@@ -7,8 +7,14 @@
 1386039222 c:\users\chinnikrishna\documents\github\jobshop\code\jssrep\rep\fileops.h
 	<cstdio>
 
-1385978370 source:c:\users\chinnikrishna\documents\github\jobshop\code\jssrep\rep\main.cpp
-	"Operations.h"
+1386063356 source:c:\users\chinnikrishna\documents\github\jobshop\code\jssrep\rep\main.cpp
+	<cstdio>
+	<iostream>
+	"types.h"
+	"crossover.h"
+	"FileOps.h"
+	"EvaluateIndividual.h"
+	"UniverseGenerator.h"
 
 1385978364 c:\users\chinnikrishna\documents\github\jobshop\code\jssrep\rep\operations.h
 	<cstring>
@@ -25,7 +31,7 @@
 1385762824 source:c:\users\chinnikrishna\documents\github\jobshop\code\jssrep\rep\individualgenerator.cpp
 	"Operations.h"
 
-1386041638 source:c:\users\chinnikrishna\documents\github\jobshop\code\jssrep\rep\universegenerator.cpp
+1386058153 source:c:\users\chinnikrishna\documents\github\jobshop\code\jssrep\rep\universegenerator.cpp
 	<iostream>
 	<ctime>
 	<cstdlib>
@@ -33,9 +39,10 @@
 	"UniverseGenerator.h"
 	"EvaluateIndividual.h"
 
-1386041244 source:c:\users\chinnikrishna\documents\github\jobshop\code\jssrep\rep\evaluateindividual.cpp
+1386063338 source:c:\users\chinnikrishna\documents\github\jobshop\code\jssrep\rep\evaluateindividual.cpp
 	<cstring>
 	<iostream>
+	<algorithm>
 	"types.h"
 	"EvaluateIndividual.h"
 
@@ -53,7 +60,7 @@
 1386040900 c:\users\chinnikrishna\documents\github\jobshop\code\jssrep\rep\types.h
 	<string>
 
-1386043915 c:\users\chinnikrishna\documents\github\jobshop\code\jssrep\rep\evaluateindividual.h
+1386063325 c:\users\chinnikrishna\documents\github\jobshop\code\jssrep\rep\evaluateindividual.h
 	<string>
 	"types.h"
 
