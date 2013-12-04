@@ -128,6 +128,9 @@ int SortPopulation(Individual Popu[],int population,Individual *temp)
         //cout<<"Chromosome:"<<temp[i].Chromosome<<" Fitness:"<<temp[i].Fitness<<endl;
     }
     sort(temp, temp+population, [](Individual const &a, Individual const &b){ return a.Fitness < b.Fitness; });
+    //for(int i=0;i<population;i++)
+        //temp[i].Fitness=temp[i].Fitness/temp[population-1].Fitness;
+
     #if 0
     cout<<"Sorted"<<endl;
     for(int i=0;i<population;i++)

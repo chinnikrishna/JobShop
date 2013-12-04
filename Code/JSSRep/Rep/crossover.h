@@ -4,8 +4,10 @@
 #include <string>
 #include "types.h"
 
+int CreateNewPopulation(Individual OldPop[],int population,Individual *NewPop,int NumJobs,int NumMachines);
 string CrossOver(const string& parent, const string& donor, unsigned int len_crossover,
                  unsigned int numJobs, unsigned int numMachines);
+string RouletteSelection(int TotalFitness,Individual *Popu,int Population);
 
 unsigned int GetInsertionPoint(const string& parent, unsigned int* parentPos,
                                unsigned char cutChrStartGene, unsigned int cutChrStartGenePos);

@@ -33,7 +33,7 @@ unsigned int NumMachines;
 #define __debug__
 
 #define CROSSOVER_PERC  (0.4)
-#define NUM_GENERATIONS (3)
+#define NUM_GENERATIONS (5)
 int main(int argc,char** argv)
 {
     //Parsing command line parameters
@@ -44,7 +44,7 @@ int main(int argc,char** argv)
     }
 
     //Create Universe
-    unsigned int population = atoi(argv[2]);
+    unsigned int population = 10;//atoi(argv[2]);
     unsigned int len_crossover;
 
 
@@ -55,6 +55,7 @@ int main(int argc,char** argv)
     //2. Create the universe
     Individual* universe = new Individual[population];
     Individual* SortedPopulation = new Individual[population];
+    Individual* NewPopulation = new Individual[population];
 
     //Fill the universe with individuals
     CreateUniverse(population, universe,NumJobs,NumMachines);
@@ -64,47 +65,26 @@ int main(int argc,char** argv)
         EvaluateIndividual(universe[i],NumJobs, NumMachines,&T,&P);
 
 
-    //Sort the population according to their fitness and fill it in Sorted
+    //Sort the population according to their fitness and fill it in SortedPopulation
     SortPopulation(universe,population,SortedPopulation);
+    //cout<<"Hero was:"<<SortedPopulation[0].Chromosome<<" whose fitness is "<<SortedPopulation[0].Fitness<<endl;
 
-    //Crossover
-    string offspring;
-    string parent = SortedPopulation[0].Chromosome;
-    string donor = SortedPopulation[1].Chromosome;
-    len_crossover = NumJobs * NumMachines * CROSSOVER_PART;
-    try{
-            offspring = CrossOver(parent,donor,len_crossover,NumJobs,NumMachines);
-
-    }
-    catch (exception e)
+    //Evolving
+    for(int GenCounter=0;GenCounter<NUM_GENERATIONS;GenCounter++)
     {
-        cout<<e;
-    }
-    cout<<"Child:"<<offspring;
-
-    #if 0
-    for(unsigned int j = 0; j < NUM_GENERATIONS; j++)
-    {
-
+        CreateNewPopulation(SortedPopulation,population,NewPopulation,NumJobs,NumMachines);
         for(unsigned int i = 0; i < population; i++)
-        {
-            //EvaluatePopulation
-            EvaluateIndividual(universe[i],NumJobs, NumMachines,&T,&P);
-        }
+            EvaluateIndividual(NewPopulation[i],NumJobs, NumMachines,&T,&P);
+        SortPopulation(NewPopulation,population,SortedPopulation);
+        //cout<<"Hero is:"<<SortedPopulation[0].Chromosome<<" whose fitness is "<<SortedPopulation[0].Fitness<<endl;
 
-        // Sort the evaluated population. Do something
+        //cout<<"New POP"<<endl;
+        //for(int i=0;i<population;i++)
+            //cout<<"Chromosome:"<<SortedPopulation[i].Chromosome<<" Fitness:"<<SortedPopulation[i].Fitness<<endl;
 
-        // Generate Offsprings
-        string parent = GenerateChromosome(NumJobs,NumMachines);
-        string donor = GenerateChromosome(NumJobs,NumMachines);
-        len_crossover = NumJobs * NumMachines * CROSSOVER_PART;
-
-        for(int i = 0; i < population; i++)
-        {
-            string offspring = CrossOver(parent,donor,len_crossover,NumJobs,NumMachines);
-        }
     }
-    #endif
+
+
 
 
     //Cleanup

@@ -38,7 +38,7 @@ int CreateUniverse(int Population, Individual* Universe, unsigned int NumJobs, u
     if(!Universe)
         return 0;
     //Seeding the Random number generator
-    srand(time(0));
+    srand(NULL);
     for(int i = 0; i < Population; i++)
     {
         Universe[i].Chromosome = GenerateChromosome(NumJobs,NumMachines);

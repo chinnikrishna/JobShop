@@ -4,9 +4,53 @@
 #include <cstring>
 
 #include "crossover.h"
+#define CROSSOVER_PART	(0.4)
+#define RANDOM_NUM		((float)rand()/(RAND_MAX+1))
 
 using namespace std;
 
+int CreateNewPopulation(Individual OldPop[],int population,Individual *NewPop,int NumJobs,int NumMachines)
+{
+
+    string parent1,parent2;
+    int len_crossover = NumJobs * NumMachines * CROSSOVER_PART;
+    //Calculating Total fitness
+    int TotalFitness=0;
+    for(int i=0;i<population;i++)
+        TotalFitness=TotalFitness+OldPop[i].Fitness;
+    for(int i=0;i<population;i++)
+    {
+        parent1=RouletteSelection(TotalFitness,OldPop,population);
+        parent2=RouletteSelection(TotalFitness,OldPop,population);
+        //cout<<"P1:"<<parent1<<endl;//=RouletteSelection(TotalFitness,OldPop,population);
+        cout<<"P2:"<<parent2<<endl;//=RouletteSelection(TotalFitness,OldPop,population);
+        //NewPop[i].Chromosome=CrossOver(parent1,parent2,len_crossover,NumJobs,NumMachines);
+    }
+    return 0;
+}
+string RouletteSelection(int TotalFitness,Individual *Popu,int Population)
+{
+    srand(time(NULL));
+    float rand_num=((float)rand()/(RAND_MAX+1));
+    float Slice = (float)(rand_num * TotalFitness);
+    float FitnessSoFar = 0.0f;
+    string tempchromsome;
+    for (int i=0; i<Population; i++)
+	{
+		FitnessSoFar += Popu[i].Fitness;
+
+		//if the fitness so far > random number return the chromo at this point
+		if (FitnessSoFar >= Slice)
+        {
+            cout<<"I am here"<<endl;
+            tempchromsome=Popu[i].Chromosome;
+            cout<<Popu[i].Chromosome;
+            cout<<tempchromsome;
+            break;
+        }
+	}
+    return tempchromsome;
+}
 string CrossOver(const string& parent,
 				 const string& donor,
 				 unsigned int len_crossover,
@@ -31,13 +75,13 @@ string CrossOver(const string& parent,
 	 * Repair the combined chromosome by deleting genes from parent
 	 * that match the name and index of implanted genes from donor
 	 */
+
 	offspring = RepairCombinedChromosome(combinedChromosome, len_chr + len_crossover, numJobs,
 									len_crossover);
 
 
 	if(combinedChromosome)
 			delete[] combinedChromosome;
-
 	return offspring;
 }
 
@@ -237,7 +281,7 @@ string RepairCombinedChromosome(gene* combinedChromosome, unsigned int len, unsi
 	}
 
 	// Now mark for deletion each parent gene which is in the implanted gene
-	std::cout << std::endl;
+	//std::cout << std::endl;
 
 #ifdef __debug__
 	cout << "Genes marked for deletion: <name:index> = ";
