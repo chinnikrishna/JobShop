@@ -4,7 +4,7 @@
 #include <cstring>
 #include <ctime>
 #include "crossover.h"
-#define CROSSOVER_PART	(0.4)
+#define CROSSOVER_PART	(0.7)
 
 using namespace std;
 
@@ -15,20 +15,31 @@ int CreateNewPopulation(Individual OldPop[],int population,Individual *NewPop,in
     int len_crossover = NumJobs * NumMachines * CROSSOVER_PART;
     //Calculating Total fitness
     int TotalFitness=0;
-    for(int i=0;i<population;i++)
-        TotalFitness=TotalFitness+OldPop[i].Fitness;
+    int x=0,y=1;
+
     for(int i=0;i<population;i++)
     {
-        srand(time(0));
-        parent1=OldPop[rand()%((i-0+1)+0)].Chromosome;
-        parent2=OldPop[rand()%((i-0+1)+0)].Chromosome;
+
+        x=rand()%((population));
+        y=rand()%((population));
+        while(x==y)
+        {
+           y=rand()%((population));
+        }
+
+
+        parent1=OldPop[x].Chromosome;
+        parent2=OldPop[y].Chromosome;
+        //cout<<"P1:"<<parent1<<endl;
+        //cout<<"P2:"<<parent2<<endl;
         NewPop[i].Chromosome=CrossOver(parent1,parent2,len_crossover,NumJobs,NumMachines);
+        //cout<<"Child:"<<NewPop[i].Chromosome<<endl;
     }
+
     return 0;
 }
 string RouletteSelection(int TotalFitness,Individual *Popu,int Population)
 {
-    srand(time(NULL));
     float rand_num=((float)rand()/(RAND_MAX+1));
     float Slice = (float)(rand_num * TotalFitness);
     float FitnessSoFar = 0.0f;
@@ -95,7 +106,7 @@ void GetCombinedChromosome(const string& parent,
 	unsigned int l;
 
 	// Randomly choose a crossover point in the donor
-	srand(time(NULL));
+	//srand(time(NULL));
 	unsigned int crossover_point = rand() % len_chr;
 
 	unsigned int insertion_point = 0;

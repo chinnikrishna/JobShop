@@ -11,7 +11,7 @@
 				<Option object_output="obj/Debug/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
-				<Option parameters="C:\Benchmark\ABZ5.txt 100" />
+				<Option parameters="C:\Benchmark\LA40.txt 100" />
 				<Compiler>
 					<Add option="-std=c++11" />
 				</Compiler>

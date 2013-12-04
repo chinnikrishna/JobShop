@@ -33,7 +33,7 @@ unsigned int NumMachines;
 #define __debug__
 
 #define CROSSOVER_PERC  (0.4)
-#define NUM_GENERATIONS (100)
+#define NUM_GENERATIONS (10)
 int main(int argc,char** argv)
 {
     //Parsing command line parameters
@@ -42,9 +42,10 @@ int main(int argc,char** argv)
         cerr<<"Usage: " << argv[0] <<" -BenchmarkName -Population" <<endl;
         return 0;
     }
-
+    //Seed the randomizer
+    srand(0);
     //Create Universe
-    unsigned int population = 10;//atoi(argv[2]);
+    unsigned int population = 100000;//atoi(argv[2]);
     unsigned int len_crossover;
 
 
@@ -69,11 +70,28 @@ int main(int argc,char** argv)
     SortPopulation(universe,population,SortedPopulation);
     cout<<"Hero was:"<<SortedPopulation[0].Chromosome<<" whose fitness is "<<SortedPopulation[0].Fitness<<endl;
 
+
+
+
+    float nfit=1.0;
+    float tfit=SortedPopulation[0].Fitness;
+    while(nfit>tfit)
+    {
+        CreateNewPopulation(SortedPopulation,population,NewPopulation,NumJobs,NumMachines);
+         for(unsigned int i = 0; i < population; i++)
+            EvaluateIndividual(NewPopulation[i],NumJobs, NumMachines,&T,&P);
+        SortPopulation(NewPopulation,population,SortedPopulation);
+        nfit=SortedPopulation[0].Fitness;
+        if(nfit<tfit)
+            cout<<"Hero is:"<<SortedPopulation[0].Chromosome<<" whose fitness is "<<SortedPopulation[0].Fitness<<endl;
+
+    }
+    #if 0
     //Evolving
     for(int GenCounter=0;GenCounter<NUM_GENERATIONS;GenCounter++)
     {
         CreateNewPopulation(SortedPopulation,population,NewPopulation,NumJobs,NumMachines);
-        for(unsigned int i = 0; i < population; i++)
+         for(unsigned int i = 0; i < population; i++)
             EvaluateIndividual(NewPopulation[i],NumJobs, NumMachines,&T,&P);
         SortPopulation(NewPopulation,population,SortedPopulation);
         cout<<"Hero is:"<<SortedPopulation[0].Chromosome<<" whose fitness is "<<SortedPopulation[0].Fitness<<endl;
@@ -83,7 +101,7 @@ int main(int argc,char** argv)
             //cout<<"Chromosome:"<<SortedPopulation[i].Chromosome<<" Fitness:"<<SortedPopulation[i].Fitness<<endl;
 
     }
-
+    #endif
 
 
 

@@ -22,10 +22,10 @@ int EvaluateIndividual(Individual& indv, unsigned int Jobs, unsigned int Machine
     unsigned int k=0;
     unsigned int start=0;
     //Array to keep track of task
-    unsigned int Tnext[Jobs];
-    unsigned int Snext[Jobs];
-    unsigned int Jstart[Jobs];
-    unsigned int Mstart[Jobs];
+    unsigned int Tnext[Machines];
+    unsigned int Snext[Machines];
+    unsigned int Jstart[Machines];
+    unsigned int Mstart[Machines];
     //Copying Technology and Processing time matrix
     unsigned int **T2 = (*T1);
     unsigned int **P2 = (*P1);
@@ -53,7 +53,7 @@ int EvaluateIndividual(Individual& indv, unsigned int Jobs, unsigned int Machine
     //Time Matrix
     unsigned int Jstartind[Jobs][Machines];
     //Setting to zero
-    for(unsigned int a=0;a<Jobs;a++)
+    for(unsigned int a=0;a<Machines;a++)
     {
         Tnext[a]=0;
         Snext[a]=0;
@@ -128,8 +128,8 @@ int SortPopulation(Individual Popu[],int population,Individual *temp)
         //cout<<"Chromosome:"<<temp[i].Chromosome<<" Fitness:"<<temp[i].Fitness<<endl;
     }
     sort(temp, temp+population, [](Individual const &a, Individual const &b){ return a.Fitness < b.Fitness; });
-    //for(int i=0;i<population;i++)
-        //temp[i].Fitness=temp[i].Fitness/temp[population-1].Fitness;
+    for(int i=0;i<population;i++)
+        temp[i].Fitness=temp[i].Fitness/temp[population-1].Fitness;
 
     #if 0
     cout<<"Sorted"<<endl;
