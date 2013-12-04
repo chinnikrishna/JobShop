@@ -33,7 +33,7 @@ unsigned int NumMachines;
 #define __debug__
 
 #define CROSSOVER_PERC  (0.4)
-#define NUM_GENERATIONS (5)
+#define NUM_GENERATIONS (100)
 int main(int argc,char** argv)
 {
     //Parsing command line parameters
@@ -67,7 +67,7 @@ int main(int argc,char** argv)
 
     //Sort the population according to their fitness and fill it in SortedPopulation
     SortPopulation(universe,population,SortedPopulation);
-    //cout<<"Hero was:"<<SortedPopulation[0].Chromosome<<" whose fitness is "<<SortedPopulation[0].Fitness<<endl;
+    cout<<"Hero was:"<<SortedPopulation[0].Chromosome<<" whose fitness is "<<SortedPopulation[0].Fitness<<endl;
 
     //Evolving
     for(int GenCounter=0;GenCounter<NUM_GENERATIONS;GenCounter++)
@@ -76,7 +76,7 @@ int main(int argc,char** argv)
         for(unsigned int i = 0; i < population; i++)
             EvaluateIndividual(NewPopulation[i],NumJobs, NumMachines,&T,&P);
         SortPopulation(NewPopulation,population,SortedPopulation);
-        //cout<<"Hero is:"<<SortedPopulation[0].Chromosome<<" whose fitness is "<<SortedPopulation[0].Fitness<<endl;
+        cout<<"Hero is:"<<SortedPopulation[0].Chromosome<<" whose fitness is "<<SortedPopulation[0].Fitness<<endl;
 
         //cout<<"New POP"<<endl;
         //for(int i=0;i<population;i++)

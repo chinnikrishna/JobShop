@@ -2,10 +2,9 @@
 #include <ctime>
 #include <iostream>
 #include <cstring>
-
+#include <ctime>
 #include "crossover.h"
 #define CROSSOVER_PART	(0.4)
-#define RANDOM_NUM		((float)rand()/(RAND_MAX+1))
 
 using namespace std;
 
@@ -20,11 +19,10 @@ int CreateNewPopulation(Individual OldPop[],int population,Individual *NewPop,in
         TotalFitness=TotalFitness+OldPop[i].Fitness;
     for(int i=0;i<population;i++)
     {
-        parent1=RouletteSelection(TotalFitness,OldPop,population);
-        parent2=RouletteSelection(TotalFitness,OldPop,population);
-        //cout<<"P1:"<<parent1<<endl;//=RouletteSelection(TotalFitness,OldPop,population);
-        cout<<"P2:"<<parent2<<endl;//=RouletteSelection(TotalFitness,OldPop,population);
-        //NewPop[i].Chromosome=CrossOver(parent1,parent2,len_crossover,NumJobs,NumMachines);
+        srand(time(0));
+        parent1=OldPop[rand()%((i-0+1)+0)].Chromosome;
+        parent2=OldPop[rand()%((i-0+1)+0)].Chromosome;
+        NewPop[i].Chromosome=CrossOver(parent1,parent2,len_crossover,NumJobs,NumMachines);
     }
     return 0;
 }
@@ -45,7 +43,7 @@ string RouletteSelection(int TotalFitness,Individual *Popu,int Population)
             cout<<"I am here"<<endl;
             tempchromsome=Popu[i].Chromosome;
             cout<<Popu[i].Chromosome;
-            cout<<tempchromsome;
+             cout<<tempchromsome;
             break;
         }
 	}
