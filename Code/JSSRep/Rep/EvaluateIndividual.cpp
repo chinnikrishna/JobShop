@@ -117,20 +117,26 @@ int EvaluateIndividual(Individual& indv, unsigned int Jobs, unsigned int Machine
     #endif
     return 0;
 }
+
 int SortPopulation(Individual Popu[],int population,Individual *temp)
 {
-    cout<<"Init"<<endl;
-    #if 0
+    //cout<<"Init"<<endl;
     for(int i=0;i<population;i++)
     {
-        temp[i]=Popu[i].Fitness;
-        cout<<temp[i]<<endl;
+        temp[i].Fitness=Popu[i].Fitness;
+        temp[i].Chromosome=Popu[i].Chromosome;
+        //cout<<"Chromosome:"<<temp[i].Chromosome<<" Fitness:"<<temp[i].Fitness<<endl;
+    }
+    sort(temp, temp+population, [](Individual const &a, Individual const &b){ return a.Fitness < b.Fitness; });
+    #if 0
+    cout<<"Sorted"<<endl;
+    for(int i=0;i<population;i++)
+    {
+        cout<<"Chromosome:"<<temp[i].Chromosome<<" Fitness:"<<temp[i].Fitness<<endl;
     }
     #endif
-    sort(temp,temp+population);
-    cout<<"Sorted"<<endl;
-
 }
+
 
 /*int PrintGnattChart()
 {

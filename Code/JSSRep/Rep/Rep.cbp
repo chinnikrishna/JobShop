@@ -11,6 +11,10 @@
 				<Option object_output="obj/Debug/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
+				<Option parameters="C:\Benchmark\F5.txt 10" />
+				<Compiler>
+					<Add option="-std=c++11" />
+				</Compiler>
 			</Target>
 			<Target title="Release">
 				<Option output="bin/Release/Rep" prefix_auto="1" extension_auto="1" />

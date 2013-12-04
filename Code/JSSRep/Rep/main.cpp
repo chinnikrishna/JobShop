@@ -9,6 +9,7 @@
 
 #include <cstdio>
 #include <iostream>
+#include <cstdlib>
 #include "types.h"
 //#include "Operations.h"
 #include "crossover.h"
@@ -33,41 +34,53 @@ unsigned int NumMachines;
 
 #define CROSSOVER_PERC  (0.4)
 #define NUM_GENERATIONS (3)
-int main()
+int main(int argc,char** argv)
 {
+    //Parsing command line parameters
+    if(argc < 3)
+    {
+        cerr<<"Usage: " << argv[0] <<" -BenchmarkName -Population" <<endl;
+        return 0;
+    }
+
     //Create Universe
-    unsigned int population = 10;
+    unsigned int population = atoi(argv[2]);
     unsigned int len_crossover;
 
-    //Sorted Array
-    //float SortedFitness[population];
 
-    //Reading Benchmarks
-    FILE* fp = fopen("C:\\Benchmark\\LA40.txt","r+");
+    //1. Reading Benchmarks
+    FILE* fp = fopen(argv[1],"r+");
     ReadBenchMark(fp, &NumJobs, &NumMachines);
 
-    // Create the universe
+    //2. Create the universe
     Individual* universe = new Individual[population];
-    Individual* SortedFitness = new Individual[population];
+    Individual* SortedPopulation = new Individual[population];
+
     //Fill the universe with individuals
     CreateUniverse(population, universe,NumJobs,NumMachines);
 
     //Evaluate the fitness of each individual
     for(unsigned int i = 0; i < population; i++)
-    {
         EvaluateIndividual(universe[i],NumJobs, NumMachines,&T,&P);
-        //cout<<"Fitness:"<<universe[i].Fitness<<endl;
-    }
+
+
     //Sort the population according to their fitness and fill it in Sorted
-    SortPopulation(universe,population,SortedFitness);
-    for (int i = 0; i<population;i++)
-        cout << SortedFitness[i] << " ";
+    SortPopulation(universe,population,SortedPopulation);
+
     //Crossover
-    string parent =
-    string donor = GenerateChromosome(NumJobs,NumMachines);
+    string offspring;
+    string parent = SortedPopulation[0].Chromosome;
+    string donor = SortedPopulation[1].Chromosome;
     len_crossover = NumJobs * NumMachines * CROSSOVER_PART;
+    try{
+            offspring = CrossOver(parent,donor,len_crossover,NumJobs,NumMachines);
 
-
+    }
+    catch (exception e)
+    {
+        cout<<e;
+    }
+    cout<<"Child:"<<offspring;
 
     #if 0
     for(unsigned int j = 0; j < NUM_GENERATIONS; j++)
