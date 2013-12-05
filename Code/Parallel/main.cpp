@@ -8,6 +8,11 @@ using namespace std;
 extern unsigned int **T;
 //Processing Time Matrix
 extern unsigned int **P;
+// Number of Jobs
+unsigned int NumJobs;
+// Number of Machines
+unsigned int NumMachines;
+//Time Variables
 struct timespec startTime;
 struct timespec endTime;
 //Main Function
@@ -20,8 +25,13 @@ int main(int argc,char** argv)
 		exit(1);
     }
 	//Start Clock
-    clock_gettime(CLOCK_REALTIME, &StartTime);
-    //1. Reading Benchmarks
+    clock_gettime(CLOCK_REALTIME, &startTime);
+    //Reading Benchmarks
     FILE* fp = fopen(argv[1],"r+");
     ReadBenchMark(fp, &NumJobs, &NumMachines);
+	//End Clock
+	clock_gettime(CLOCK_REALTIME, &endTime);
+	//Reporting Results
+	unsigned long long int runtime = 1000000000 * (EndTime.tv_sec - StartTime.tv_sec) + EndTime.tv_nsec - StartTime.tv_nsec;
+  	printf("(%d.%09lld sec)\n", runtime / 1000000000, runtime % 1000000000);
 }
