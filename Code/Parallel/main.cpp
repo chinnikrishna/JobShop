@@ -1,9 +1,15 @@
+//Library Includes
 #include <iostream>
 #include <time>
 #include <assert>
 #include <pthread.h>
+//File Includes
+#include "types.h"
+#include "crossover.h"
+#include "FileOps.h"
+#include "EvaluateIndividual.h"
+#include "UniverseGenerator.h"
 using namespace std;
-
 //Technology Matrix
 extern unsigned int **T;
 //Processing Time Matrix
@@ -32,6 +38,6 @@ int main(int argc,char** argv)
 	//End Clock
 	clock_gettime(CLOCK_REALTIME, &endTime);
 	//Reporting Results
-	unsigned long long int runtime = 1000000000 * (EndTime.tv_sec - StartTime.tv_sec) + EndTime.tv_nsec - StartTime.tv_nsec;
+	unsigned long long int runtime = 1000000000 * (endTime.tv_sec - startTime.tv_sec) + endTime.tv_nsec - startTime.tv_nsec;
   	printf("(%d.%09lld sec)\n", runtime / 1000000000, runtime % 1000000000);
 }
