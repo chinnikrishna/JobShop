@@ -156,7 +156,10 @@ int EvaluateIndividual(Individual& indv, unsigned int Jobs, unsigned int Machine
     #endif
     return 0;
 }
-
+bool comp(Individual const &a, Individual const &b)
+{
+     return a.Fitness < b.Fitness;
+}
 int SortPopulation(Individual Popu[],int population,Individual *temp)
 {
     //cout<<"Init"<<endl;
@@ -166,7 +169,7 @@ int SortPopulation(Individual Popu[],int population,Individual *temp)
         temp[i].Chromosome=Popu[i].Chromosome;
         //cout<<"Chromosome:"<<temp[i].Chromosome<<" Fitness:"<<temp[i].Fitness<<endl;
     }
-    sort(temp, temp+population, [](Individual const &a, Individual const &b){ return a.Fitness < b.Fitness; });
+    sort(temp, temp+population,comp);// [](Individual const &a, Individual const &b){ return a.Fitness < b.Fitness; });
     for(int i=0;i<population;i++)
         temp[i].Fitness=temp[i].Fitness/temp[population-1].Fitness;
 
