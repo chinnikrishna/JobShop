@@ -49,7 +49,7 @@ int main(int argc,char** argv)
     srand(0);
     bool done=false;
     //Create Universe
-    unsigned int population = 1000;//atoi(argv[2]);
+    unsigned int population = atoi(argv[2]);
     unsigned int len_crossover;
 
     //Start Clock

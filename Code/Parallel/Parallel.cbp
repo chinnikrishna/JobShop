@@ -2,22 +2,21 @@
 <CodeBlocks_project_file>
 	<FileVersion major="1" minor="6" />
 	<Project>
-		<Option title="Rep" />
+		<Option title="Parallel" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="Debug">
-				<Option output="bin/Debug/Rep" prefix_auto="0" extension_auto="1" />
+				<Option output="bin/Debug/Parallel" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/Debug/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
-				<Option parameters="C:\Benchmark\sample.txt 100" />
 				<Compiler>
-					<Add option="-std=c++11" />
+					<Add option="-g" />
 				</Compiler>
 			</Target>
 			<Target title="Release">
-				<Option output="bin/Release/Rep" prefix_auto="1" extension_auto="1" />
+				<Option output="bin/Release/Parallel" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/Release/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
@@ -33,16 +32,7 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
-		<Unit filename="EvaluateIndividual.cpp" />
-		<Unit filename="EvaluateIndividual.h" />
-		<Unit filename="FileOps.cpp" />
-		<Unit filename="FileOps.h" />
-		<Unit filename="UniverseGenerator.cpp" />
-		<Unit filename="UniverseGenerator.h" />
-		<Unit filename="crossover.cpp" />
-		<Unit filename="crossover.h" />
 		<Unit filename="main.cpp" />
-		<Unit filename="types.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />
