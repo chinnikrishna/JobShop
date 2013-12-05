@@ -93,6 +93,7 @@ int EvaluateIndividual(Individual& indv, unsigned int Jobs, unsigned int Machine
     //Printing Solution and Time
     if (done)
     {
+        cout<<"Solution is "<<ind<<" whose makespan is "<<Jstart[0];
         cout << endl;
         cout << "Solution Matrix"<<endl;
         for (unsigned int i = 0; i < Machines; i++)
@@ -115,6 +116,7 @@ int EvaluateIndividual(Individual& indv, unsigned int Jobs, unsigned int Machine
             }
             cout << endl;
         }
+
 
     }
 
