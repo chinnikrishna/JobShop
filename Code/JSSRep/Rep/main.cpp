@@ -10,8 +10,8 @@
 #include <cstdio>
 #include <iostream>
 #include <cstdlib>
+#include <ctime>
 #include "types.h"
-//#include "Operations.h"
 #include "crossover.h"
 #include "FileOps.h"
 #include "EvaluateIndividual.h"
@@ -29,6 +29,9 @@ unsigned int NumJobs;
 // Number of Machines
 unsigned int NumMachines;
 
+struct timespec StartTime;                  //Used by gettime
+struct timespec EndTime;
+
 #define CROSSOVER_PART	(0.4)
 #define __debug__
 
@@ -44,11 +47,13 @@ int main(int argc,char** argv)
     }
     //Seed the randomizer
     srand(0);
+    bool done=false;
     //Create Universe
-    unsigned int population = 100000;//atoi(argv[2]);
+    unsigned int population = 1000;//atoi(argv[2]);
     unsigned int len_crossover;
 
-
+    //Start Clock
+    clock_gettime(CLOCK_REALTIME, &StartTime);
     //1. Reading Benchmarks
     FILE* fp = fopen(argv[1],"r+");
     ReadBenchMark(fp, &NumJobs, &NumMachines);
@@ -63,7 +68,7 @@ int main(int argc,char** argv)
 
     //Evaluate the fitness of each individual
     for(unsigned int i = 0; i < population; i++)
-        EvaluateIndividual(universe[i],NumJobs, NumMachines,&T,&P);
+        EvaluateIndividual(universe[i],NumJobs, NumMachines,&T,&P,done);
 
 
     //Sort the population according to their fitness and fill it in SortedPopulation
@@ -75,33 +80,28 @@ int main(int argc,char** argv)
 
     float nfit=1.0;
     float tfit=SortedPopulation[0].Fitness;
-    while(nfit>tfit)
+
+    while(1)
     {
         CreateNewPopulation(SortedPopulation,population,NewPopulation,NumJobs,NumMachines);
          for(unsigned int i = 0; i < population; i++)
-            EvaluateIndividual(NewPopulation[i],NumJobs, NumMachines,&T,&P);
+            EvaluateIndividual(NewPopulation[i],NumJobs, NumMachines,&T,&P,done);
         SortPopulation(NewPopulation,population,SortedPopulation);
         nfit=SortedPopulation[0].Fitness;
         if(nfit<tfit)
+        {
             cout<<"Hero is:"<<SortedPopulation[0].Chromosome<<" whose fitness is "<<SortedPopulation[0].Fitness<<endl;
+            done=true;
+            EvaluateIndividual(SortedPopulation[0],NumJobs, NumMachines,&T,&P,done);
+            break;
+        }
 
     }
-    #if 0
-    //Evolving
-    for(int GenCounter=0;GenCounter<NUM_GENERATIONS;GenCounter++)
-    {
-        CreateNewPopulation(SortedPopulation,population,NewPopulation,NumJobs,NumMachines);
-         for(unsigned int i = 0; i < population; i++)
-            EvaluateIndividual(NewPopulation[i],NumJobs, NumMachines,&T,&P);
-        SortPopulation(NewPopulation,population,SortedPopulation);
-        cout<<"Hero is:"<<SortedPopulation[0].Chromosome<<" whose fitness is "<<SortedPopulation[0].Fitness<<endl;
+    clock_gettime(CLOCK_REALTIME, &EndTime);
 
-        //cout<<"New POP"<<endl;
-        //for(int i=0;i<population;i++)
-            //cout<<"Chromosome:"<<SortedPopulation[i].Chromosome<<" Fitness:"<<SortedPopulation[i].Fitness<<endl;
-
-    }
-    #endif
+	//Reporting Results
+	unsigned long long int runtime = 1000000000 * (EndTime.tv_sec - StartTime.tv_sec) + EndTime.tv_nsec - StartTime.tv_nsec;
+  	printf("(%d.%09lld sec)\n", runtime / 1000000000, runtime % 1000000000);
 
 
 

@@ -14,7 +14,7 @@
 #include "types.h"
 #include "EvaluateIndividual.h"
 
-int EvaluateIndividual(Individual& indv, unsigned int Jobs, unsigned int Machines, unsigned int ***T1,unsigned int ***P1)
+int EvaluateIndividual(Individual& indv, unsigned int Jobs, unsigned int Machines, unsigned int ***T1,unsigned int ***P1,bool done)
 {
     string ind = indv.Chromosome;
     unsigned int i=0;
@@ -91,28 +91,67 @@ int EvaluateIndividual(Individual& indv, unsigned int Jobs, unsigned int Machine
     //Assigning fitness
     indv.Fitness=Jstart[0];
     //Printing Solution and Time
-    #if 0
-    cout << endl;
-    cout << "Solution Matrix"<<endl;
-    for (unsigned int i = 0; i < Machines; i++)
+    if (done)
     {
-        cout << "M" << i + 1 << "\t";
-        for(unsigned int j = 0; j < Jobs; j++)
-        {
-            cout << S[i][j]<< "\t";
-        }
         cout << endl;
+        cout << "Solution Matrix"<<endl;
+        for (unsigned int i = 0; i < Machines; i++)
+        {
+            cout << "M" << i + 1 << "\t";
+            for(unsigned int j = 0; j < Jobs; j++)
+            {
+                cout << S[i][j]<< "\t";
+            }
+            cout << endl;
+        }
+        cout<<endl<<endl;
+        cout<<"JOB TIMES:"<<endl;
+        for (unsigned int i = 0; i < Jobs; i++)
+        {
+            cout << "J" << i + 1 << "\t";
+            for(unsigned int j = 0; j < Machines; j++)
+            {
+                cout << Jstartind[i][j] << "\t";
+            }
+            cout << endl;
+        }
+
     }
-    cout<<endl<<endl;
-    cout<<"JOB TIMES:"<<endl;
-    for (unsigned int i = 0; i < Jobs; i++)
+
+    #if 0
     {
-        cout << "J" << i + 1 << "\t";
-        for(unsigned int j = 0; j < Machines; j++)
+         //Gnatt-Chart
+        cout<<endl;
+        cout<<"Gnatt-Chart"<<endl;
+        int TaskNumber=0;
+        int lastMachine=0;
+        int lastTask=0;
+        string GnattChart[Machines];
+        for(int  a=0;a<Machines;a++)
         {
-            cout << Jstartind[i][j] << "\t";
+            cout << "M" << a + 1 << "\t";
+            for(int  b=0;b<Jobs;b++)
+            {
+                int  SolutionTemp=S[a][b]-'A';
+                for(int c=0;c<Machines;c++)
+                    if(T[SolutionTemp][c]==a)
+                        TaskNumber=c;
+                int SlotPosition=(((Jstartind[SolutionTemp][TaskNumber])-(Jstartind[lastMachine][lastTask])));
+                if(SlotPosition<0)
+                    SlotPosition=-SlotPosition;
+                if(SlotPosition<=1)
+                    cout<<string(P[SolutionTemp][TaskNumber],S[a][b]);
+                if(SlotPosition>1)
+                {
+                    cout<<string(SlotPosition,'-');
+                    cout<<string(P[SolutionTemp][TaskNumber],S[a][b]);
+                }
+                lastMachine=SolutionTemp;
+                lastTask=TaskNumber;
+            }
+            cout<<endl;
         }
-        cout << endl;
+
     }
     #endif
     return 0;
